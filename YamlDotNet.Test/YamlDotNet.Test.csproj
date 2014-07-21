@@ -74,6 +74,7 @@
     <Compile Include="Core\EventsHelper.cs" />
     <Compile Include="Core\MarkCursorTests.cs" />
     <Compile Include="Core\ParserTests.cs" />
+    <Compile Include="Core\SchemaTests.cs" />
     <Compile Include="Core\TokenHelper.cs" />
     <Compile Include="Core\ScannerTests.cs" />
     <Compile Include="Dump.cs" />
