@@ -148,7 +148,6 @@
     <Compile Include="Core\CharacterAnalyzer.cs" />
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\Cursor.cs" />
-    <Compile Include="Core\DuplicateAnchorException.cs" />
     <Compile Include="Core\Emitter.cs" />
     <Compile Include="Core\EmitterState.cs" />
     <Compile Include="Core\ParserExtensions.cs" />
@@ -182,6 +181,7 @@
     <Compile Include="Core\MergingParser.cs" />
     <Compile Include="Core\Parser.cs" />
     <Compile Include="Core\ParserState.cs" />
+    <Compile Include="Core\MaximumRecursionLevelReachedException.cs" />
     <Compile Include="Core\Tokens\Comment.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ExpressionExtensions.cs" />
@@ -222,6 +222,7 @@
     <Compile Include="RepresentationModel\DocumentLoadingState.cs" />
     <Compile Include="RepresentationModel\EmitterState.cs" />
     <Compile Include="RepresentationModel\IYamlVisitor.cs" />
+    <Compile Include="Core\RecursionLevel.cs" />
     <Compile Include="RepresentationModel\YamlAliasNode.cs" />
     <Compile Include="RepresentationModel\YamlDocument.cs" />
     <Compile Include="RepresentationModel\YamlMappingNode.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Serialization\BuilderSkeleton.cs" />
     <Compile Include="RepresentationModel\YamlVisitorBase.cs" />
     <Compile Include="Serialization\Converters\GuidConverter.cs" />
+    <Compile Include="Serialization\EventEmitters\CustomTagEventEmitter.cs" />
     <Compile Include="Serialization\Deserializer.cs" />
     <Compile Include="Serialization\DeserializerBuilder.cs" />
     <Compile Include="Serialization\EmissionPhaseObjectGraphVisitorArgs.cs" />

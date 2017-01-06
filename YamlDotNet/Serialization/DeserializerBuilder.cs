@@ -154,6 +154,29 @@ namespace YamlDotNet.Serialization
         }
 
         /// <summary>
+        /// Unregisters an existing <see cref="INodeDeserializer" /> of type <typeparam name="TNodeDeserializer" />.
+        /// </summary>
+        public DeserializerBuilder WithoutNodeDeserializer<TNodeDeserializer>()
+            where TNodeDeserializer : INodeDeserializer
+        {
+            return WithoutNodeDeserializer(typeof(TNodeDeserializer));
+        }
+
+        /// <summary>
+        /// Unregisters an existing <see cref="INodeDeserializer" /> of type <param name="nodeDeserializerType" />.
+        /// </summary>
+        public DeserializerBuilder WithoutNodeDeserializer(Type nodeDeserializerType)
+        {
+            if (nodeDeserializerType == null)
+            {
+                throw new ArgumentNullException("nodeDeserializerType");
+            }
+
+            nodeDeserializerFactories.Remove(nodeDeserializerType);
+            return this;
+        }
+
+        /// <summary>
         /// Registers an additional <see cref="INodeTypeResolver" /> to be used by the deserializer.
         /// </summary>
         public DeserializerBuilder WithNodeTypeResolver(INodeTypeResolver nodeTypeResolver)
@@ -186,6 +209,29 @@ namespace YamlDotNet.Serialization
         }
 
         /// <summary>
+        /// Unregisters an existing <see cref="INodeTypeResolver" /> of type <typeparam name="TNodeTypeResolver" />.
+        /// </summary>
+        public DeserializerBuilder WithoutNodeTypeResolver<TNodeTypeResolver>()
+            where TNodeTypeResolver : INodeTypeResolver
+        {
+            return WithoutNodeTypeResolver(typeof(TNodeTypeResolver));
+        }
+
+        /// <summary>
+        /// Unregisters an existing <see cref="INodeTypeResolver" /> of type <param name="nodeTypeResolverType" />.
+        /// </summary>
+        public DeserializerBuilder WithoutNodeTypeResolver(Type nodeTypeResolverType)
+        {
+            if (nodeTypeResolverType == null)
+            {
+                throw new ArgumentNullException("nodeTypeResolverType");
+            }
+
+            nodeTypeResolverFactories.Remove(nodeTypeResolverType);
+            return this;
+        }
+
+        /// <summary>
         /// Registers a tag mapping.
         /// </summary>
         public DeserializerBuilder WithTagMapping(string tag, Type type)
@@ -200,7 +246,30 @@ namespace YamlDotNet.Serialization
                 throw new ArgumentNullException("type");
             }
 
+            Type alreadyRegisteredType;
+            if (tagMappings.TryGetValue(tag, out alreadyRegisteredType))
+            {
+                throw new ArgumentException(string.Format("Type already has a registered type '{0}' for tag '{1}'", alreadyRegisteredType.FullName, tag), "tag");
+            }
+
             tagMappings.Add(tag, type);
+            return this;
+        }
+
+        /// <summary>
+        /// Unregisters an existing tag mapping.
+        /// </summary>
+        public DeserializerBuilder WithoutTagMapping(string tag)
+        {
+            if (tag == null)
+            {
+                throw new ArgumentNullException("tag");
+            }
+
+            if (!tagMappings.Remove(tag))
+            {
+                throw new KeyNotFoundException(string.Format("Tag '{0}' is not registered", tag));
+            }
             return this;
         }
 

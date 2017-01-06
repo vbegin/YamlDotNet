@@ -192,6 +192,18 @@ namespace YamlDotNet.Test.Serialization
         }
 
         [Fact]
+        public void SerializeCustomTags()
+        {
+            var expectedResult = Yaml.StreamFrom("tags.yaml").ReadToEnd();
+            SerializerBuilder.WithTagMapping("tag:yaml.org,2002:point", typeof(Point));
+
+            var point = new Point(10, 20);
+            var result = Serializer.Serialize(point);
+
+            result.Should().Be(expectedResult);
+        }
+
+        [Fact]
         public void DeserializeExplicitType()
         {
             var text = Yaml.StreamFrom("explicit-type.template").TemplatedOn<Simple>();
@@ -1369,6 +1381,24 @@ namespace YamlDotNet.Test.Serialization
 
             long parsed = new Deserializer().Deserialize<long>(yaml);
             Assert.Equal(value, parsed);
+        }
+
+        public class AnchorsOverwritingTestCase
+        {
+            public List<string> a { get; set; }
+            public List<string> b { get; set; }
+            public List<string> c { get; set; }
+            public List<string> d { get; set; }
+        }
+
+        [Fact]
+        public void DeserializationOfStreamWithDuplicateAnchorsSucceeds()
+        {
+            var yaml = Yaml.ParserForResource("anchors-overwriting.yaml");
+            var serializer = new DeserializerBuilder()
+                .IgnoreUnmatchedProperties()
+                .Build();
+            var deserialized = serializer.Deserialize<AnchorsOverwritingTestCase>(yaml);
         }
 
         [Fact]

@@ -25,54 +25,54 @@ using System.Runtime.Serialization;
 namespace YamlDotNet.Core
 {
     /// <summary>
-    /// The exception that is thrown when a duplicate anchor is detected.
+    /// Exception that is thrown when an infinite recursion is detected.
     /// </summary>
     [Serializable]
-    public class DuplicateAnchorException : YamlException
+    public class MaximumRecursionLevelReachedException : YamlException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
+        /// Initializes a new instance of the <see cref="MaximumRecursionLevelReachedException"/> class.
         /// </summary>
-        public DuplicateAnchorException()
+        public MaximumRecursionLevelReachedException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
+        /// Initializes a new instance of the <see cref="MaximumRecursionLevelReachedException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public DuplicateAnchorException(string message)
+        public MaximumRecursionLevelReachedException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
+        /// Initializes a new instance of the <see cref="MaximumRecursionLevelReachedException"/> class.
         /// </summary>
-        public DuplicateAnchorException(Mark start, Mark end, string message)
+        public MaximumRecursionLevelReachedException(Mark start, Mark end, string message)
             : base(start, end, message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
+        /// Initializes a new instance of the <see cref="MaximumRecursionLevelReachedException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public DuplicateAnchorException(string message, Exception inner)
+        public MaximumRecursionLevelReachedException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
 #if !(PORTABLE || UNITY)
         /// <summary>
-        /// Initializes a new instance of the <see cref="DuplicateAnchorException"/> class.
+        /// Initializes a new instance of the <see cref="MaximumRecursionLevelReachedException"/> class.
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null. </exception>
         /// <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0). </exception>
-        protected DuplicateAnchorException(SerializationInfo info, StreamingContext context)
+        protected MaximumRecursionLevelReachedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
